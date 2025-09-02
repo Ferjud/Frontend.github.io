@@ -17,7 +17,7 @@ body{
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 100vw;
+    width: 100%;
     min-height: 100vh;
     padding: 30px 40px 30px 40px;
 }
@@ -51,3 +51,116 @@ body{
     box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.2);
 }
 
+
+#inputBox{
+    display:none;
+    margin-top: 40px; 
+    gap: 8px;
+    flex-direction: row;
+    align-items: center;
+}
+
+#inputBox input {
+    padding: 8px 12px;
+    border: 5px solid rgb(175, 163, 255); /* define color y grosor */
+    border-radius: 6px;
+    outline: none; 
+    width: 250px;
+    height: 40px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 16px;
+}
+
+#inputBox button {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 20px;
+    padding: 8px 12px;
+    border-radius: 6px;
+    border: none;
+    background-color: rgb(175, 163, 255);
+    color: rgb(7, 6, 6);
+    font-weight: bold;
+    cursor: pointer;
+}
+
+
+.lista_tareas {
+    margin-top: 75px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.tarea {
+    background-color: rgba(44, 44, 44, 0.7);
+    color: rgb(208, 201, 255);
+    padding: 12px 16px;
+    border: 2px solid rgb(175, 163, 255);
+    border-radius: 8px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 22px;
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    min-width: 350px;
+    max-width: 650px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.663);
+    align-items: flex-start;
+    white-space: normal;      
+    overflow-wrap: break-word; 
+    word-break: break-word;    
+}
+
+.tarea button.eliminar {
+    background: none;
+    border: none;
+    color: rgb(175, 163, 255);
+    align-items: center;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 19px;
+}
+
+@media screen and (max-width: 775px) {
+    .tarea{
+        max-width: 400px;
+    };
+    
+}
+
+@media screen and (max-width: 575px){
+    #inputBox{
+        flex-direction: column;
+    }
+
+    #btn-agregar{
+        font-size: 18px;
+        padding: 8px 15px;
+    }
+
+    .tarea{
+        min-width: 200px;
+        max-width: 300px;
+    }
+
+    #inputBox button{
+        margin-top: 5px;
+        width: 120px;
+        padding: 6px 10px;
+        gap: 10px;
+    }
+
+    
+}
+
+@media screen and (max-width: 420px) {
+    .tarea{
+        max-width: 150px;
+    }
+    
+    h1{
+        font-size: 40px;
+    }
+}
