@@ -44,13 +44,40 @@ form{
     display: none;
 }
 
+#registerMessage,#loginMessage{
+    visibility: hidden;
+    margin-top: 25px;
+    color: rgba(255, 0, 0, 0.806);
+    padding: 3px 10px;
+    background-color: rgba(255, 243, 243, 0.849);
+    border: 2px solid rgba(255, 0, 0, 0.806);  
+    font-family: 'Space Grotesk';
+    font-size: 18px;
+    font-weight: bold;
+    max-width: 350px;
+    border-radius: 5px;
+}
 
+#registerMessage.error,
+#loginMessage.error{
+    visibility: visible;
+    color: rgba(255, 0, 0, 0.806);
+    border: 2px solid rgba(255, 0, 0, 0.806);
+    background-color: rgba(255, 243, 243, 0.849);
+}
+
+#registerMessage.success{
+    visibility: visible;
+    color: rgba(1, 167, 17, 0.858);
+    border: 2px solid rgba(1, 167, 17, 0.858);
+    background-color: rgba(245, 255, 243, 0.849);
+}
 
 fieldset{
     display: flex;
     flex-direction: column;
     gap: 25px;
-    margin-top: 50px;
+    margin-top: 20px;
     padding: 0 3px 7px 0px;
     border: none;
 }

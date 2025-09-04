@@ -1,7 +1,9 @@
 
 // Variables
 const formLogin = document.getElementById("loginForm");
+const loginMessage = document.getElementById("loginMessage");
 const formRegister = document.getElementById("registerForm");
+const registerMessage = document.getElementById("registerMessage");
 
 const inputLoginUser = formLogin.querySelector('input[name="username"]');
 const inputLoginPass = formLogin.querySelector('input[name="password"]');
@@ -30,7 +32,8 @@ async function loginUsuario(e) {
     const data = await res.json();
 
     if (!data.success) {
-        alert(data.message);
+        loginMessage.classList.add("error"); // aplica estilos y visibilidad desde CSS
+        loginMessage.textContent = data.message; // usuario no existe o contraseña incorrecta
         return;
     }
 
@@ -53,14 +56,26 @@ async function registrarUsuario(e) {
     });
     const data = await res.json();
 
+    // Resetear clases previas
+    registerMessage.className = "message";
+
     if (!data.success) {
-        alert(data.message);
+         // Mostrar mensaje de error
+        registerMessage.classList.add("error");
+        registerMessage.textContent = data.message;
         return;
     }
 
-    alert("Usuario creado correctamente, ahora inicia sesión");
-    toggleForms(); // mostrar login después de registrar
+    // Mostrar mensaje de éxito
+    registerMessage.classList.add("success");
+    registerMessage.textContent = data.message;
+
+    // Limpiar inputs
+    inputRegisterUser.value = "";
+    inputRegisterPass.value = "";
 }
+
+
 
 // Alternar formularios
 function toggleForms() {
