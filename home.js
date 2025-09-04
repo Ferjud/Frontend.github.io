@@ -7,8 +7,8 @@ const lista = document.querySelector(".lista_tareas");
 
 // Mostrar input al hacer clic en "Agregar tarea"
 btnAgregar.addEventListener("click", () => {
-    inputBox.style.display = "flex";   // mostrar el input y botones
-    inputTarea.focus();                 // poner el cursor listo
+    inputBox.style.display = "flex";   
+    inputTarea.focus();                 
 });
 
 // Guardar tarea
@@ -20,24 +20,55 @@ inputTarea.addEventListener("keydown", (e) => {
 // Cancelar tarea antes de agregar
 btnCancelar.addEventListener("click", () => {
     inputTarea.value = "";
-    inputBox.style.display = "none";   // ocultar input y botones
+    inputBox.style.display = "none";   
 });
 
-function agregarTarea() {
+// Función agregar tarea
+async function agregarTarea() {
     const texto = inputTarea.value.trim();
-    if(texto === "") return;
+    if (!texto) return;
 
-    const nuevaTarea = document.createElement("div");
-    nuevaTarea.classList.add("tarea");
-    nuevaTarea.innerHTML = `${texto} <button class="eliminar">X</button>`;
-
-    // Botón eliminar para cada tarea
-    nuevaTarea.querySelector(".eliminar").addEventListener("click", () => {
-        lista.removeChild(nuevaTarea);
+    const res = await fetch("/api/tareas", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ tarea: texto })
     });
+    const data = await res.json();
 
-    lista.appendChild(nuevaTarea);
-    inputTarea.value = "";               // limpiar input
-    inputTarea.focus();                  // mantener cursor listo
+    if (!data.success) {
+        alert(data.message);
+        return;
+    }
+
+    inputTarea.value = "";
+    inputTarea.focus();
+    cargarTareas();
 }
 
+// Función cargar tareas
+async function cargarTareas() {
+    const res = await fetch("/api/tareas");
+    const data = await res.json();
+    if (!data.success) return;
+
+    lista.innerHTML = "";
+
+    data.tareas.forEach((t, i) => {
+        const tareaDiv = document.createElement("div");
+        tareaDiv.classList.add("tarea");
+        tareaDiv.innerHTML = `${t.texto} <button class="eliminar" data-id="${t.id}">X</button>`;
+        lista.appendChild(tareaDiv);
+    });
+
+    // Eliminar tareas
+    document.querySelectorAll(".eliminar").forEach(btn => {
+        btn.addEventListener("click", async () => {
+            const id = btn.dataset.id;
+            await fetch(`/api/tareas/${id}`, { method: "DELETE" });
+            cargarTareas();
+        });
+    });
+}
+
+//cargar la página
+window.addEventListener("DOMContentLoaded", cargarTareas)
