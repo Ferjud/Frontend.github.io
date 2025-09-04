@@ -40,6 +40,10 @@ form{
     
 }
 
+#registerForm{
+    display: none;
+}
+
 
 
 fieldset{
