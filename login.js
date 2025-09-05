@@ -82,8 +82,14 @@ function toggleForms() {
     const loginVisible = formLogin.style.display !== "none";
     formLogin.style.display = loginVisible ? "none" : "block";
     formRegister.style.display = loginVisible ? "block" : "none";
-}
 
+
+ // Limpiar mensajes cuando se muestra el formulario
+    loginMessage.textContent = "";
+    loginMessage.className = "";  // quita clases de error o success
+    registerMessage.textContent = "";
+    registerMessage.className = "";
+}
 
 // Event Listeners
 formLogin.addEventListener("submit", loginUsuario);
