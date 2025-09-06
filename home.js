@@ -1,3 +1,4 @@
+//Variables
 const btnAgregar = document.getElementById("btn-agregar");
 const inputBox = document.getElementById("inputBox");
 const inputTarea = document.getElementById("nuevaTareaInput");
@@ -6,19 +7,19 @@ const btnCancelar = document.getElementById("cancelarTarea");
 const lista = document.querySelector(".lista_tareas");
 
 // Mostrar input al hacer clic en "Agregar tarea"
-btnAgregar.addEventListener("click", () => {
+btnAgregar.addEventListener("click", function() {
     inputBox.style.display = "flex";   
     inputTarea.focus();                 
 });
 
 // Guardar tarea
 btnGuardar.addEventListener("click", agregarTarea);
-inputTarea.addEventListener("keydown", (e) => {
+inputTarea.addEventListener("keydown", function(e) {
     if(e.key === "Enter") agregarTarea();
 });
 
 // Cancelar tarea antes de agregar
-btnCancelar.addEventListener("click", () => {
+btnCancelar.addEventListener("click", function() {
     inputTarea.value = "";
     inputBox.style.display = "none";   
 });
@@ -53,16 +54,30 @@ async function cargarTareas() {
 
     lista.innerHTML = "";
 
-    data.tareas.forEach((t, i) => {
+    data.tareas.forEach( function(t) {
         const tareaDiv = document.createElement("div");
         tareaDiv.classList.add("tarea");
-        tareaDiv.innerHTML = `${t.texto} <button class="eliminar" data-id="${t.id}">X</button>`;
+
+        // Texto de la tarea
+        const spanTexto = document.createElement("span");
+        spanTexto.textContent = t.texto;
+
+        // Botón eliminar
+        const btnEliminar = document.createElement("button");
+        btnEliminar.classList.add("eliminar");
+        btnEliminar.dataset.id = t.id;
+        btnEliminar.textContent = "X";
+
+        // Agregar al contenedor
+        tareaDiv.appendChild(spanTexto);
+        tareaDiv.appendChild(btnEliminar);
+        lista.appendChild(tareaDiv);
         lista.appendChild(tareaDiv);
     });
 
     // Eliminar tareas
-    document.querySelectorAll(".eliminar").forEach(btn => {
-        btn.addEventListener("click", async () => {
+    document.querySelectorAll(".eliminar").forEach(btn, function() {
+        btn.addEventListener("click", async function() {
             const id = btn.dataset.id;
             await fetch(`/api/tareas/${id}`, { method: "DELETE" });
             cargarTareas();
