@@ -40,7 +40,7 @@ form{
     
 }
 
-#registerForm{
+.hidden{
     display: none;
 }
 

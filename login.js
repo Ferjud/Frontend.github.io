@@ -52,12 +52,11 @@ async function registrarUsuario(e) {
     const res = await fetch("/api/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ username, password })
+        body: JSON.stringify({ username: username, password: password })
     });
     const data = await res.json();
 
-    // Resetear clases previas
-    registerMessage.className = "message";
+    
 
     if (!data.success) {
          // Mostrar mensaje de error
@@ -79,9 +78,9 @@ async function registrarUsuario(e) {
 
 // Alternar formularios
 function toggleForms() {
-    const loginVisible = formLogin.style.display !== "none";
-    formLogin.style.display = loginVisible ? "none" : "block";
-    formRegister.style.display = loginVisible ? "block" : "none";
+    formLogin.classList.toggle("hidden");
+    formRegister.classList.toggle("hidden");
+
 
 
  // Limpiar mensajes cuando se muestra el formulario
@@ -95,19 +94,16 @@ function toggleForms() {
 formLogin.addEventListener("submit", loginUsuario);
 formRegister.addEventListener("submit", registrarUsuario);
 
-showRegisterLink.addEventListener("click", e => {
+
+showRegisterLink.addEventListener("click", function(e) {
     e.preventDefault();
     toggleForms();
 });
 
-showLoginLink.addEventListener("click", e => {
+
+showLoginLink.addEventListener("click", function(e) {
     e.preventDefault();
     toggleForms();
 });
 
-//inicio: mostrar login y ocultar registro
-window.addEventListener("DOMContentLoaded", () => {
-    formLogin.style.display = "block";
-    formRegister.style.display = "none";
-});
 
