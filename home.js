@@ -1,10 +1,19 @@
 //Variables
+const btnLogout = document.getElementById("btn-logout");
 const btnAgregar = document.getElementById("btn-agregar");
 const inputBox = document.getElementById("inputBox");
 const inputTarea = document.getElementById("nuevaTareaInput");
 const btnGuardar = document.getElementById("guardarTarea");
 const btnCancelar = document.getElementById("cancelarTarea");
 const lista = document.querySelector(".lista_tareas");
+
+
+
+btnLogout.addEventListener("click", async function () {
+    await fetch("/api/logout", { method: "POST" });
+    window.location.href = "index.html";
+});
+
 
 // Mostrar input al hacer clic en "Agregar tarea"
 btnAgregar.addEventListener("click", function() {
@@ -72,11 +81,10 @@ async function cargarTareas() {
         tareaDiv.appendChild(spanTexto);
         tareaDiv.appendChild(btnEliminar);
         lista.appendChild(tareaDiv);
-        lista.appendChild(tareaDiv);
     });
 
     // Eliminar tareas
-    document.querySelectorAll(".eliminar").forEach(btn, function() {
+    document.querySelectorAll(".eliminar").forEach(function(btn) {
         btn.addEventListener("click", async function() {
             const id = btn.dataset.id;
             await fetch(`/api/tareas/${id}`, { method: "DELETE" });

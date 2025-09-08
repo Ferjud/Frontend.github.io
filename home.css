@@ -4,15 +4,9 @@
     margin: 0;
 }
 
-h1{
-    color: rgb(176, 163, 255);
-    text-align: center;
-    font-family: Michroma;
-    font-size: 50px;
-    margin-top: 20px;
-}
 
 body{
+    position: relative;
     background-color: #35383e;
     display: flex;
     flex-direction: column;
@@ -22,8 +16,31 @@ body{
     padding: 30px 40px 30px 40px;
 }
 
+h1{
+    color: rgb(176, 163, 255);
+    text-align: center;
+    font-family: Michroma;
+    font-size: 50px;
+    margin-top: 80px;
+}
+
+#btn-logout {
+    position: absolute;
+    left: 100px;
+    background-color: rgb(255, 255, 255); 
+    color: rgb(68, 0, 178);
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: bold;
+    font-size: 18px;
+    padding: 7px 12px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: inset -2px -2px 1px 1px rgba(27, 1, 123, 0.479);;
+}
+
 #btn-agregar {
-    margin-top: 100px;
+    margin-top: 110px;
     background-color: rgb(255, 255, 255); 
     color: rgb(30, 30, 30);
     font-family: 'Space Grotesk', sans-serif;
@@ -136,6 +153,11 @@ body{
 }
 
 @media screen and (max-width: 575px){
+
+    #btn-logout{
+        left: auto;
+    }
+
     #inputBox{
         flex-direction: column;
     }
